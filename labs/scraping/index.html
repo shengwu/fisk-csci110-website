@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 3: Web scraping</title>
+  <link rel="stylesheet" href="/fisk/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/fisk/static/prism.css" />
+  <link rel="stylesheet" href="/fisk/static/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p><a href="/fisk/">back to home</a></p>
+      <h1>Lab 3: Web scraping</h1>
+      <p>Ever found a bunch of information on the web that you wanted to copy down by it was taking forever? Like song lyrics from an album or stats for a bunch of atheletes? Enter web scraping: the practice of using programs to systematically download webpages.</p>
+
+      <h2>Etiquette</h2>
+      <p>Before we start, realize that behind every webpage there's people or an organization with people. Here are things to keep in mind when you're scraping webpages:</p>
+      <ul>
+        <li>Follow robots.txt (a list of pages not to scrape e.g. <a href="http://google.com/robots.txt">google.com/robots.txt</a>)</li>
+        <li>Throttle your requests! Don't do more than a few per second</li>
+        <li>Use a unique user-agent that provides enough info that the sites you're crawling can contact you (your domain name, for example)</li>
+        <li>To make sure you're in the clear, contact the owner of the website</li>
+      </ul>
+      <p>For this lab assignment you'll be scraping a specific set of pages from my personal server. When scraping other sites, be sure to follow the above guidelines.</p>
+
+      <h2>Assignment</h2>
+      <p>Your assignment for this lab is to scrape a specific set of webpages from my server. When you're done, have your program print out all of the URLs that it visited.</p>
+
+      <p>This is how you will do this:</p>
+      <ol>
+        <li>Scrape a page</li>
+        <li>Get all of the URLs from that page</li>
+        <li>For each URL you got, see step 1</li>
+      </ol>
+      <p>You don't need to save the contents of the page; only record the URL. Repeat until you run out of pages to scrape. </p>
+      
+      <p>Hint: you will need a while loop to do this. </p>
+      <p>Hint: you'll want to keep a running list of pages that need to be scraped. This might be achieved by using the List class (explained below), calling get(NUMBER) to get an element from the front and adding new URLs to the back. So you'll need a variable to keep track of the "front" of the list. You'll be done when there are no URLs left to process in the list.</p>
+
+      <h2>Lists</h2>
+      <p>You'll be using Java's "List" type in this lab. Here's a quick code snippet demonstrating how they work:</p>
+      <pre><code class="language-java">List&lt;String&gt; names = new ArrayList&lt;String&gt;();
+names.add("rahmi");
+names.add("jade");
+
+// Prints rahmi
+System.out.println(names.get(0));
+
+// Prints jade
+System.out.println(names.get(1));
+      
+// Removes jade from the list
+names.remove(1);</code></pre>
+      <p>There are other things you can find out too; see the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/List.html">documentation</a>.</p>
+      <p>You'll need <code>import java.util.List;</code> and <code>import java.util.ArrayList;</code> at the top of your program.</p>
+
+      <h2>Example</h2>
+      <p>If your scraper was to start from <a href="/fisk/labs/scraping/example">this page</a>, the correct output would be (not necessarily in this order):</p>
+      <pre>http://sheng.io/fisk/labs/scraping/example/
+http://sheng.io/fisk/labs/scraping/example/page1.html
+http://sheng.io/fisk/labs/scraping/example/page2.html
+http://sheng.io/fisk/labs/scraping/example/page3.html</pre>
+      <p>Follow the links by hand to understand why.</p>
+
+      <h2>Starter code</h2>
+      <p>Here's where you start for the assignment: <a href="/fisk/labs/scraping/assignment/">this page</a></p>
+      <p>Save this as a file called <strong>Scraper.java</strong>. Write your code where it says TODO.</p>
+      <pre><code class="language-java">
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Scraper {
+  // Pattern for recognizing a URL, based off RFC 3986. Source:
+  // http://stackoverflow.com/questions/5713558/detect-and-extract-url-from-a-string
+  private static final Pattern URL_PATTERN = Pattern.compile(
+      &quot;(?:^|[\\W])((ht|f)tp(s?):\\/\\/|www\\.)&quot;
+      + &quot;(([\\w\\-]+\\.){1,}?([\\w\\-.~]+\\/?)*&quot;
+      + &quot;[\\p{Alnum}.,%_=?&amp;#\\-+()\\[\\]\\*$~@!:/{};']*)&quot;,
+      Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+
+  private static String getPage(String address)
+            throws MalformedURLException, IOException {
+    URL url = new URL(address);
+        Scanner s = new Scanner(url.openStream()).useDelimiter(&quot;\\A&quot;);
+        return s.hasNext() ? s.next() : &quot;&quot;;
+  }
+
+  private static List&lt;String&gt; getURLs(String webpageContents) {
+    Matcher matcher = URL_PATTERN.matcher(webpageContents);
+        List&lt;String&gt; urls = new ArrayList&lt;&gt;();
+    while (matcher.find()) {
+      int matchStart = matcher.start(1);
+      int matchEnd = matcher.end();
+            urls.add(webpageContents.substring(matchStart, matchEnd));
+    }
+        return urls;
+  }
+
+  public static void main(String[] args)
+            throws MalformedURLException, IOException {
+        // This scrapes the example page. It then only prints the URLs on that page.
+        //
+        // You'll need to replace this URL with the assignment URL.
+        String baseUrl = &quot;http://sheng.io/fisk/labs/scraping/example&quot;;
+        String page = getPage(baseUrl);
+        List&lt;String&gt; urls = getURLs(page);
+        System.out.println(urls);
+
+    // TODO: use while loops to write code and scrape all 
+    // of the pages under sheng.io/fisk/labs/scraping/assignment
+  }
+}
+
+      </code></pre>
+
+    </div>
+  </div>
+</div>
+<script src="/fisk/static/prism.js"></script>
+</body>
+</html>

@@ -13,7 +13,35 @@
       <p><a href="/fisk/">back to home</a></p>
 
       <h1>Lab 4: Debugging</h1>
-      <p>Finding issues with your programs</p>
+      <p>When your programs run into errors, you'll have to figure out why they broke. This is called debugging.</p>
+
+      <h2>Anatomy of a stack trace</h2>
+      <p>A stack trace is something that looks like this. It tells you the error that you ran into and where it happened. Then it traces all the way up through the code. For example, if you run into an error calling System.out.println from the main function, it would tell you that the error occurred at System.out.println, which you called from main, etc.</p>
+      <pre><code class="language-java">
+Exception in thread "main" java.lang.NullPointerException
+    at com.example.myproject.Book.getTitle(Book.java:16)
+    at com.example.myproject.Author.getBookTitles(Author.java:25)
+    at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
+      </code></pre>
+      <p>For more information, see <a href="http://stackoverflow.com/questions/3988788/what-is-a-stack-trace-and-how-can-i-use-it-to-debug-my-application-errors">http://stackoverflow.com/questions/3988788/what-is-a-stack-trace-and-how-can-i-use-it-to-debug-my-application-errors</a></p>
+
+      <h2>The three types of errors</h2>
+      <ol>
+        <li>Compile-time: discovered when compiling your code. Examples: missing brace, trying to add a boolean and a String, using a variable that doesn't exist</li>
+        <li>Runtime: your code breaks when you try to run it. This usually happens when an Exception is thrown, which usually means that Java ran into an error that it doesn't know how to handle. Examples: trying to divide by zero, using a String that hasn't been initialized (though the compiler will often catch this at compile time)</li>
+        <li>Logic: your code runs but it's wrong. Example: A program that calculates the area of a triangle returns h * w instead of 0.5 * h * w</li>
+      </ol>
+
+      <h2>Your assignment</h2>
+      <p>Debug the following five programs. Work in pairs. Submit your solutions on Canvas.</p>
+      <ul>
+        <li><a href="/fisk/labs/debugging/One.java">One.java</a></li>
+        <li><a href="/fisk/labs/debugging/Two.java">Two.java</a></li>
+        <li><a href="/fisk/labs/debugging/Three.java">Three.java</a></li>
+        <li><a href="/fisk/labs/debugging/Four.java">Four.java</a></li>
+        <li><a href="/fisk/labs/debugging/Five.java">Five.java</a></li>
+      </ul>
+      <p>Hint: One and Two have compilation errors. Three and Four have compilation and runtime errors. Five has logic errors.</p>
     </div>
   </div>
 </div>

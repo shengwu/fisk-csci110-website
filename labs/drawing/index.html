@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 6: Drawing</title>
+  <link rel="stylesheet" href="/fisk/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/fisk/static/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p><a href="/fisk/">back to home</a></p>
+
+      <h1>Lab 6: Drawing</h1>
+
+      <p>Today we're going to draw stuff using Java.</p>
+
+      <h2>Example</h2>
+
+      <p>You'll need <a href="/fisk/labs/drawing/DrawingPanel.java">DrawingPanel.java</a> and example code: <a href="/fisk/labs/drawing/Example.java">Example.java</a></p>
+
+      <p>Compile both files by typing <code>javac DrawingPanel.java Example.java</code>. Then run <code>java Example</code>. A window should appear that looks like this:</p>
+
+      <div><img src="example.png" alt="" width="300"></div>
+
+      <h2>Assignment</h2>
+
+      <p>Pick a partner. Submit the completed java files to Canvas. Make sure they compile before you submit them.</p>
+
+      <p><a href="https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html">Official documentation for the Graphics class</a></p>
+
+      <h3>Part 1: grid</h3>
+
+      <p>Draw a grid of rectangles. Starter code: <a href="Rectangles.java">Rectangles.java</a></p>
+      
+      <p>It should be 11 rectangles wide and 4 tall. Your finished product should look something like this:</p>
+
+      <div><img src="rectangles.png" alt="" width="600"></div>
+
+      <h3>Part 2: staircase</h3>
+
+      <p>Draw a staircase with at least 10 steps using a for loop. Create a new file called <code>Stairs.java</code> and reuse your starter code from Part 1, renaming the class to Stairs. <strong>Only use one for loop, one variable in the loop, and one drawRect function call for this problem.</strong> It should look something like this:</p>
+
+      <div><img src="staircase.png" alt="" width="200"></div>
+
+      <h3>Part 3: faces</h3>
+
+      <p>Change <a href="Face.java">Face.java</a> to draw three separate faces across the screen. First, write a function that lets you draw a face in a specific location. Then add code to your main method to call the function and draw the face in different locations.</p>
+
+      <p><strong>You must use a function in this part.</strong> No credit will be given for programs where the face-drawing code was simply copy and pasted three times.</p>
+
+      <p>After you create a function, your program should look something like this. If you added a line of code to the main function "drawFace(g);" so that you had two in a row, it would draw two faces on top of each other. Are there parameters you can add to draw the face in different places?</p>
+
+      <pre>import java.awt.*;
+
+public class Face {
+    static void drawFace(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.drawOval(10, 30, 100, 100);
+        g.setColor(Color.BLUE);
+        g.fillOval(30, 60, 20, 20);
+        g.fillOval(70, 60, 20, 20);
+        g.setColor(Color.RED);
+        g.drawLine(40, 100, 80, 100);
+    }
+
+    public static void main(String[] args) {
+        DrawingPanel panel = new DrawingPanel(320, 180);
+        Graphics g = panel.getGraphics();
+
+        drawFace(g);
+    }
+}
+      </pre>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

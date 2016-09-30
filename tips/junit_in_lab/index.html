@@ -15,13 +15,13 @@
       <h1>Running JUnit in the lab</h1>
 
 
-      <p>To use JUnit in the lab, we have to specify the classpath manually since we can't change environment variables on the lab computers. First <a href="http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar">download jUnit</a> and <a href="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar">download hamcrest</a>, Then run the following command to compile your files and tests (replacing "YOUR_USERNAME" with your fisk username and My.java and MyTest.java with the names of your files):</p>
+      <p>To use JUnit in the lab, we have to specify the classpath manually since we can't change environment variables on the lab computers. First <a href="http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar">download jUnit</a> and <a href="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar">download hamcrest</a>, Then run the following command to compile your files and tests (replacing <span class="text-danger">YOUR_USERNAME</span> with your fisk username and <span class="text-info">My.java</span> and <span class="text-info">MyTest.java</span> with the names of your files):</p>
 
-      javac -classpath .;C:\Users\YOUR_USERNAME\Downloads\hamcrest-core-1.3.jar;C:\Users\YOUR_USERNAME\Downloads\junit-4.12.jar My.java MyTest.java
+      javac -classpath .;C:\Users\<span class="text-danger">YOUR_USERNAME</span>\Downloads\hamcrest-core-1.3.jar;C:\Users\<span class="text-danger">YOUR_USERNAME</span>\Downloads\junit-4.12.jar <span class="text-info">My.java MyTest.java</span>
 
-      <p>To run a test file called MyTest, run this command (replacing "YOUR_USERNAME" with your fisk username and MyTest with the class name of your test):</p>
+      <p>To run a test file called MyTest, run this command (replacing <span class="text-danger">YOUR_USERNAME</span> with your fisk username and <span class="text-info">MyTest</span> with the class name of your test):</p>
 
-      java -classpath .;C:\Users\YOUR_USERNAME\Downloads\hamcrest-core-1.3.jar;C:\Users\YOUR_USERNAME\Downloads\junit-4.12.jar org.junit.runner.JUnitCore MyTest
+      java -classpath .;C:\Users\<span class="text-danger">YOUR_USERNAME</span>\Downloads\hamcrest-core-1.3.jar;C:\Users\<span class="text-danger">YOUR_USERNAME</span>\Downloads\junit-4.12.jar org.junit.runner.JUnitCore <span class="text-info">MyTest</span>
 
     </div>
   </div>

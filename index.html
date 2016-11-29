@@ -5,6 +5,20 @@
   <title>CSCI 110 Fall 2016</title>
   <link rel="stylesheet" href="/fisk/static/bootstrap.min.css">
   <link rel="stylesheet" href="/fisk/static/style.css">
+  <style>
+pre {
+  background-color: #ddd;
+  padding: 10px;
+}
+
+pre, code {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+  </style>
 </head>
 <body>
 <div class="container">
@@ -19,6 +33,19 @@
         <li>Office hours: Tuesday 2-3:30 pm, Wednesday 1-2:30 pm, Thursday 1-3 pm</li>
       </ul>
 
+      <h2>FINAL</h2>
+
+      <p>NOT AVAILABLE YET</p>
+
+      <div id="testcmds" class="form-inline">
+        <p>To test your code for the final, enter your Fisk username here: <input class="form-control" v-model="message" placeholder="USERNAME HERE"></p>
+        <p><a href="http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar">Download jUnit</a> and <a href="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar">download hamcrest</a>.</p>
+        <p>Use this command to compile both Final.java and FinalTest.java:</p>
+        <pre class="language-bash"><code>javac -classpath .;C:\Users\{{ message }}\Downloads\hamcrest-core-1.3.jar;C:\Users\{{ message }}\Downloads\junit-4.12.jar Final.java FinalTest.java</code></pre>
+        <p>Use this command to run the tests in FinalTest.java after compiling:</p>
+        <pre class="language-bash"><code>java -classpath .;C:\Users\{{ message }}\Downloads\hamcrest-core-1.3.jar;C:\Users\{{ message }}\Downloads\junit-4.12.jar org.junit.runner.JUnitCore FinalTest</code></pre>
+      </div>
+
       <h2>Labs</h2>
       <ol>
         <li><a href="/fisk/labs/madlibs/">Mad Libs</a></li>
@@ -31,7 +58,8 @@
         <li>Debugging Part 2: <a href="/fisk/labs/debugging2/One.java">One.java</a>, <a href="/fisk/labs/debugging2/Two.java">Two.java</a>, <a href="/fisk/labs/debugging2/Three.java">Three.java</a>. Extra credit (15 pts): <a href="https://codefights.com/challenge/JZs5SSyPfQg55QMYZ">my CodeFights challenge</a> submitted as a comment on Canvas</li>
         <li><a href="/fisk/labs/codingame/">Codingame</a></li>
         <li><a href="/fisk/labs/android/">Android</a> (extra credit, 50 points)</li>
-        <li>Write a song with five sections, three of which are randomized: <a href="/fisk/labs/Music.java">Music.java</a></li>
+        <li>Write a song with five sections, three of which are randomized, at least 20 notes per section: <a href="/fisk/labs/Music.java">Music.java</a></li>
+        <li><a href="/fisk/labs/commandline/">Command Line</a></li>
       </ol>
 
       <h2>Assignments (Section 1 only)</h2>
@@ -42,6 +70,7 @@
         <li>ArrayLists starter code: <a href="/fisk/assignments/Assignment4.java">Assignment4.java</a> and <a href="/fisk/assignments/Assignment4Test.java">Assignment4Test.java</a>
         <li>FiskString: <a href="/fisk/assignments/FiskString.java">FiskString.java</a> and <a href="/fisk/assignments/FiskStringTest.java">FiskStringTest.java</a>
         <li>HashMaps: <a href="/fisk/assignments/Assignment6.java">Assignment6.java</a> and <a href="/fisk/assignments/Assignment6Test.java">Assignment6Test.java</a>
+        <li>HashMaps and objects: <a href="/fisk/assignments/Assignment7.java">Assignment7.java</a> and <a href="/fisk/assignments/Assignment7Test.java">Assignment7Test.java</a>
       </ol>
 
       <h2>Quizzes (Section 1 only)</h2>
@@ -61,5 +90,17 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+var testcmds = new Vue({
+  el: '#testcmds',
+  data: {
+    message: ''
+  }
+})
+</script>
+
 </body>
 </html>
